@@ -52,12 +52,12 @@ following command line: `conda create -n recombine_env`
 Once you have created the new environment, 'activate' it as follows:
 `source activate recombine_env`
 Then, install the required dependencies with the following commands:
-    - `conda install scipy`
-    - `conda install scikit-learn`
-    - `conda install pip`
-    - `pip install nibabel`
-    - `pip install nilearn`
-    - `pip install nipype`
+- `conda install scipy`
+- `conda install scikit-learn`
+- `conda install pip`
+- `pip install nibabel`
+- `pip install nilearn`
+- `pip install nipype`
 
 
 ## Usage
