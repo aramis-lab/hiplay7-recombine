@@ -74,7 +74,7 @@ Where:
 - [rep2\_s1].nii(.gz): first slab of second repetition
 - [rep2\_s2].nii(.gz): second slab of second repetition
 - [lowres].nii(.gz): low resolution volume
-[output\_dir]: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash.
+- [output\_dir]: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash.
 All files can be provided as either .nii or .nii.gz volume images.
 
 The final output will be found at [output\_dir]/rs\_float\_ponderated.nii
