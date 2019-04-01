@@ -61,7 +61,6 @@ Then, install the required dependencies with the following commands:
 
 
 ## Usage
------
 
 Optional: if you have installed dependencies via miniconda, as described in section 'Install', then activate the conda environment that contains the dependencies with the following command line:
 `source activate recombine_env`
