@@ -16,7 +16,7 @@ image from the following input:
    - _repetition 2 - slab 2_: high-resolution MR volume, covering the same part of the head as _repetition  2 - slab 1_
    - _low-res_: low-resolution MR volume, covering a large part of the head, that encompasses the parts from _repetition 1 - slab 1_ and _repetition 2 - slab 1_
 
-For any use of this code, the following paper must be cited:
+For any use of this code, please cite the following article:
 > L Marrakchi-Kacem, A Vignaud, J Sein, J Germain, TR Henry, C Poupon, 
 > L Hertz-Pannier, S Lehericy, O Colliot, PF Van de Moortele, M Chupin. 
 > Robust imaging of hippocampal inner structure at 7T: in vivo
@@ -41,7 +41,7 @@ into local, user-defined environments.
 
 Miniconda can be obtained at the following website:
 https://docs.conda.io/en/latest/miniconda.html. 
-Please make sure you choose version corresponding to your operating
+Please make sure you choose the version corresponding to your operating
 system (Windows, Mac OS X or Linux) and to the architecture of your
 computer (32bit or 64bit).
 
