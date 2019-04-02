@@ -26,13 +26,13 @@ For any use of this code, the following paper must be cited:
 ## Installation
 
 `recombine.py` requires the following software and libraries:
-- _Python_ (either version 2. or 3.)
-    - _numpy_
-    - _nibabel_
-    - _nilearn_
-    - _nipype_
-- _Matlab_
-- _SPM_
+- Python (either version 2. or 3.)
+    - numpy
+    - nibabel
+    - nilearn
+    - nipype
+- Matlab
+- SPM
 
 In case you are not sure you already have the relevant Python libraries
 (numpy, nibabel, nipype), we recommend installing `Miniconda`, a program
