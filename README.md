@@ -1,6 +1,6 @@
 # HIPLAY7 - recombine
 
-`recombine.py` - combine several slabs into a single high resolution slab
+`recombine.py` - combine several slabs into a single high resolution slab.
 
 **Author**: Linda Marrakchi-Kacem, Brain and Spine Institute.
 **Maintainer**: Alexis Guyot, Brain and Spine Institute.
@@ -40,17 +40,17 @@ that lets you install and run Python packages and their dependencies
 into local, user-defined environments.
 
 Miniconda can be obtained at the following website:
-(https://docs.conda.io/en/latest/miniconda.html)[https://docs.conda.io/en/latest/miniconda.html]
+https://docs.conda.io/en/latest/miniconda.html. 
 Please make sure you choose version corresponding to your operating
 system (Windows, Mac OS X or Linux) and to the architecture of your
 computer (32bit or 64bit).
 
-Once you have installed Miniconda, we suggest you create a new conda
+Once you have installed Miniconda, we suggest you create a new Conda
 environment. This will let you install new dependencies without
 altering your current installation of Python. This can be done with the
-following command line: `conda create -n recombine_env`
+following command line: `conda create -n recombine_env`.
 Once you have created the new environment, 'activate' it as follows:
-`source activate recombine_env`
+`source activate recombine_env`.
 Then, install the required dependencies with the following commands:
 - `conda install scipy`
 - `conda install scikit-learn`
@@ -62,11 +62,11 @@ Then, install the required dependencies with the following commands:
 
 ## Usage
 
-Optional: if you have installed dependencies via miniconda, as described in section 'Install', then activate the conda environment that contains the dependencies with the following command line:
-`source activate recombine_env`
+**Optional**: if you have installed dependencies via miniconda, as described in section 'Install', then activate the conda environment that contains the dependencies with the following command line:
+`source activate recombine_env`.
 
 To launch the recombine.py script, run
-`python recombine.py [rep1\_s1].nii(.gz) [rep1\_s2].nii(.gz) [rep2\_s1].nii(.gz) [rep2\_s2].nii(.gz) [lowres].nii(.gz) [output_dir]`
+`python recombine.py [rep1\_s1].nii(.gz) [rep1\_s2].nii(.gz) [rep2\_s1].nii(.gz) [rep2\_s2].nii(.gz) [lowres].nii(.gz) [output_dir]`.
 Where:
 - [rep1\_s1].nii(.gz): first slab of first repetition
 - [rep1\_s2].nii(.gz): second slab of first repetition
@@ -74,6 +74,7 @@ Where:
 - [rep2\_s2].nii(.gz): second slab of second repetition
 - [lowres].nii(.gz): low resolution volume
 - [output\_dir]: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash.
+
 All files can be provided as either .nii or .nii.gz volume images.
 
 The final output will be found at [output\_dir]/rs\_float\_ponderated.nii
@@ -82,4 +83,4 @@ Temporary files will be found in folder [output\_dir]/debug/.
 Please manually delete this folder to save storage space.
 
 
-Last updated: Tue, 19 March 2019
+Last updated: Tue, 02 April 2019
