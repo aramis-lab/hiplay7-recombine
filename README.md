@@ -82,6 +82,3 @@ The final output will be found at [output\_dir]/rs\_float\_ponderated.nii
 
 Temporary files will be found in folder [output\_dir]/debug/.
 Please manually delete this folder to save storage space.
-
-
-Last updated: Tue, 02 April 2019
