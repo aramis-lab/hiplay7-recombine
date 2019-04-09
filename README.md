@@ -1,9 +1,10 @@
 # HIPLAY7 - recombine
 
-`recombine.py` - combine several slabs into a single high resolution slab.
+`recombine.py` - combine several slabs into a single high resolution
+slab.
 
-**Author**: Linda Marrakchi-Kacem, Brain and Spine Institute.
-**Maintainer**: Alexis Guyot, Brain and Spine Institute.
+**Authors**: Linda Marrakchi-Kacem (Brain and Spine Institute), Alexis
+Guyot (Brain and Spine Institute).
 
 
 ## Overview
