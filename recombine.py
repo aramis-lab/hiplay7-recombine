@@ -1,6 +1,6 @@
 """Code to combine different slabs into a single high resolution slab
 
-# This code was developped by Linda Marrakchi at the ARAMIS lab.
+# This code was developed by Linda Marrakchi at the ARAMIS lab.
 # Maintainer: Alexis Guyot (2019)
 #
 # For any use of this code, the following paper must be cited:
