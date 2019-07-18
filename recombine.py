@@ -118,10 +118,38 @@ def check_spm_available(args, cli_usage):
     # check if SPM path provided by the user
     if args.spm_path:
         # SPM path provided
-        # add to matlab path
-        mlab.MatlabCommand.set_default_paths(args.spm_path)
-        spm_path = args.spm_path
-        spmscript_path = "{0}/spm.m".format(spm_path)
+        # check if the user provided a path to spm.m (which they should
+        # not...) instead of path to folder
+        abs_argsspm_path = os.path.abspath(args.spm_path)
+        # check if exists
+        if os.path.exists(abs_argsspm_path):
+            if os.path.isfile(abs_argsspm_path):
+                # path fo file provided
+                # get file name
+                argsspm_filename = os.path.basename(args.spm_path)
+                # check that the file name is spm.m
+                if argsspm_filename != 'spm.m':
+                    # file name is not spm.m. Crash
+                    raise ValueError(
+                        '{0} is not a valid path to SPM.'.format(args.spm_path))
+                else:
+                    # file name is spm.m. define SPM path as the folder
+                    # containing the provided spm.m
+                    spmscript_path = args.spm_path
+                    spm_path = os.path.dirname(spmscript_path)
+            elif os.path.isdir(abs_argsspm_path):
+                # we assume that a path to a folder was provided
+                spm_path = args.spm_path
+                spmscript_path = os.path.join(spm_path, 'spm.m')
+            else:
+                # neither a folder nor a file
+                raise ValueError(
+                    '{0} is not a valid path to SPM.'.format(args.spm_path))
+            # add to matlab path
+            mlab.MatlabCommand.set_default_paths(args.spm_path)
+        else:
+            raise ValueError(
+                '{0} does not exist.'.format(args.spm_path))
     else:
         # SPM path not provided
         # Check if SPM path can be found anyway
@@ -142,12 +170,28 @@ def check_spm_available(args, cli_usage):
     # sanity check: make sure the path is OK
     #-- check the path to SPM is a valid folder
     abs_spm_path = os.path.abspath(spm_path)
-    if not os.path.isdir(abs_spm_path):
-        raise IOError('{0} is not a valid folder'.format(spm_path))
+    #---- check if exists
+    if os.path.exists(abs_spm_path):
+        #---- exists
+        #---- check if is a folder
+        if not os.path.isdir(abs_spm_path):
+            raise IOError('{0} is not a valid folder'.format(spm_path))
+    else:
+        #---- does not exist
+        raise IOError('{0} does not exist'.format(spm_path))
     #-- check if the SPM folder contains a file spm.m
+    #---- get absolute path to spm.m
     abs_spmscript_path = os.path.abspath(spmscript_path)
-    if not os.path.isfile(abs_spmscript_path):
-        raise IOError('{0} is not a valid file'.format(spmscript_path))
+    #---- check if file exists
+    if os.path.exists(abs_spmscript_path):
+        #---- spm.m is inside the folder. Check it is a file.
+        if not os.path.isfile(abs_spmscript_path):
+            raise IOError('{0} is not a file'.format(spmscript_path))
+    else:
+        #---- spm.m does not exist
+        error_msg = '{0} does not contain a file spm.m.'.format(spm_path)
+        error_msg = '{0} It is not a valid folder'.format(error_msg)
+        raise IOError(error_msg)
 
 
 def prepare_folders(outdir_path):
