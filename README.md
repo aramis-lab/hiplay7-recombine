@@ -36,7 +36,7 @@ For any use of this code, please cite the following article:
 - SPM
 
 In case you are not sure you already have the relevant Python libraries
-(numpy, nibabel, nipype), we recommend installing `Miniconda`, a program
+(numpy, nibabel, nipype), we recommend installing Miniconda, a program
 that lets you install and run Python packages and their dependencies
 into local, user-defined environments.
 
@@ -71,13 +71,13 @@ To launch the recombine.py script, run
 `python recombine.py [rep1_s1].nii(.gz) [rep1_s2].nii(.gz) [rep2_s1].nii(.gz) [rep2_s2].nii(.gz) [lowres].nii(.gz) [output_dir] (--spm_path [SPM_PATH])`
 
 Where:
-- `[rep1_s1].nii(.gz)`: first slab of first repetition
-- `[rep1_s2].nii(.gz)`: second slab of first repetition
-- `[rep2_s1].nii(.gz)`: first slab of second repetition
-- `[rep2_s2].nii(.gz)`: second slab of second repetition
-- `[lowres].nii(.gz)`: low resolution volume
-- `[output_dir]`: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash
-- `[SPM_PATH]`: (optional) path to the SPM folder (i.e., the folder that contains the script spm.m)
+- [rep1_s1].nii(.gz): first slab of first repetition
+- [rep1_s2].nii(.gz): second slab of first repetition
+- [rep2_s1].nii(.gz): first slab of second repetition
+- [rep2_s2].nii(.gz): second slab of second repetition
+- [lowres].nii(.gz): low resolution volume
+- [output_dir]: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash
+- [SPM_PATH]: (optional) path to the SPM folder (i.e., the folder that contains the script spm.m)
 
 **Note:**
 - All files can be provided as either .nii or .nii.gz volume images.
