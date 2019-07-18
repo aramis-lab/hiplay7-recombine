@@ -69,15 +69,15 @@ Then, install the required dependencies with the following commands:
 To launch the recombine.py script, run
 
 ```
-python recombine.py [rep1_s1].nii(.gz) [rep1_s2].nii(.gz) [rep2_s1].nii(.gz) [rep2_s2].nii(.gz) [lowres].nii(.gz) [output_dir] (--spm_path [SPM_PATH])
+python recombine.py [rep1_s1] [rep1_s2] [rep2_s1] [rep2_s2] [lowres] [output_dir] (--spm_path [SPM_PATH])
 ```
 
 Where:
-- [rep1_s1].nii(.gz): first slab of first repetition
-- [rep1_s2].nii(.gz): second slab of first repetition
-- [rep2_s1].nii(.gz): first slab of second repetition
-- [rep2_s2].nii(.gz): second slab of second repetition
-- [lowres].nii(.gz): low resolution volume
+- [rep1_s1]: .nii(.gz) image file. First slab of first repetition
+- [rep1_s2]: .nii(.gz) image file. Second slab of first repetition
+- [rep2_s1]: .nii(.gz) image file. First slab of second repetition
+- [rep2_s2]: .nii(.gz) image file. Second slab of second repetition
+- [lowres]: .nii(.gz) image file. Low resolution volume
 - [output_dir]: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash
 - [SPM_PATH]: (optional) path to the SPM folder (i.e., the folder that contains the script spm.m)
 
