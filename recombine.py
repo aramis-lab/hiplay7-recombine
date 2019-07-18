@@ -18,12 +18,15 @@ import sys
 import os
 import shutil
 import argparse
+import io
+import contextlib
 import gzip
 import numpy as np
 import nibabel as nib
 import nilearn as nil
 import nilearn.image
 import nipype.interfaces.spm as spm
+import nipype.interfaces.matlab as mlab
 
 
 def read_cli_args():
@@ -35,11 +38,12 @@ def read_cli_args():
         N/A
 
     Returns:
-        args
+        args (argparse.Namespace): parsed arguments
+        cli_usage (string): command-line interface usage message
     """
     # read command line arguments
-    cli_description = 'Code to combine different slabs into a single high\
-        resolution slab'
+    cli_description = 'Code to combine different slabs into a single high'
+    cli_description = '{0} resolution slab'.format(cli_description)
     parser = argparse.ArgumentParser(description=cli_description)
     # add arguments
     #-- mandatory arguments
@@ -78,11 +82,72 @@ def read_cli_args():
         '-spm',
         '--spm_path',
         help='path to SPM folder (i.e., where spm.m is located)')
-    #---- test
     # parse all arguments
     args = parser.parse_args()
 
-    return args
+    # store usage message in string
+    cli_usage = None
+    with io.StringIO() as buf, contextlib.redirect_stdout(buf):
+        parser.print_usage()
+        cli_usage = buf.getvalue()
+    if cli_usage is None:
+        raise ValueError('the CLI usage variable must not be empty')
+
+    return args, cli_usage
+
+
+def check_spm_available(args, cli_usage):
+    """Check SPM can be found by Matlab
+
+    Make sure SPM can be found by Matlab and terminate the program if it
+    cannot.
+
+    Args:
+        args (argparse.Namespace): parsed arguments
+        cli_usage (string): command-line interface usage message
+
+    Returns:
+        N/A
+    """
+    # initialise path
+    #-- folder
+    spm_path = None
+    #-- script ([folder]/spm.m)
+    spmscript_path = None
+
+    # check if SPM path provided by the user
+    if args.spm_path:
+        # SPM path provided
+        # add to matlab path
+        mlab.MatlabCommand.set_default_paths(args.spm_path)
+        spm_path = args.spm_path
+        spmscript_path = "{0}/spm.m".format(spm_path)
+    else:
+        # SPM path not provided
+        # Check if SPM path can be found anyway
+        # (e.g., if file $HOME/matlab/startup.m contains the line
+        # addpath [spm_folder])
+        res = mlab.MatlabCommand(script='which spm', mfile=False).run()
+        whichspm_output = res.runtime.stdout.splitlines()[-2]
+        if whichspm_output == '\'spm\' not found.':
+            # SPM not found
+            error_msg = 'SPM not found.\nPlease provide the path to'
+            error_msg = '{0} SPM with flag -spm [SPM_PATH]'.format(error_msg)
+            error_msg = '{0}\n{1}'.format(error_msg, cli_usage)
+            raise IOError(error_msg)
+        else:
+            spmscript_path = whichspm_output
+            spm_path = os.path.dirname(spmscript_path)
+
+    # sanity check: make sure the path is OK
+    #-- check the path to SPM is a valid folder
+    abs_spm_path = os.path.abspath(spm_path)
+    if not os.path.isdir(abs_spm_path):
+        raise IOError('{0} is not a valid folder'.format(spm_path))
+    #-- check if the SPM folder contains a file spm.m
+    abs_spmscript_path = os.path.abspath(spmscript_path)
+    if not os.path.isfile(abs_spmscript_path):
+        raise IOError('{0} is not a valid file'.format(spmscript_path))
 
 
 def prepare_folders(outdir_path):
@@ -157,7 +222,7 @@ def nii_copy(im_inpath, im_outpath):
     # Get extension of input image filename
     imfilename = os.path.basename(im_inpath)
     imfilename_ext = os.path.splitext(imfilename)[1]
-    error_msg = 'Error: input image must be of type either .nii or .nii.gz'
+    error_msg = 'input image must be of type either .nii or .nii.gz'
     if imfilename_ext == '.nii':
         # if .nii, standard copy
         shutil.copyfile(im_inpath, im_outpath)
@@ -200,7 +265,7 @@ def safe_remove(impath, dirpath):
 
     # check if the path to image encompasses the path to folder
     if not impath_real.startswith(dirpath_real_sep):
-        error_msg = 'Error: impath {0}'.format(impath)
+        error_msg = 'impath {0}'.format(impath)
         error_msg = '{0} does not belong to dirpath {1}.'.format(
             error_msg, dirpath)
         error_msg = '{0} Cannot safely remove.'.format(error_msg)
@@ -1182,7 +1247,10 @@ def main():
         N/A
     """
     # parse command-line arguments
-    args = read_cli_args()
+    args, cli_usage = read_cli_args()
+
+    # check SPM available
+    check_spm_available(args, cli_usage)
 
     # prepare folders
     [debugdir_path, tempdir_path] = prepare_folders(args.outdir_path)
