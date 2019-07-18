@@ -68,7 +68,7 @@ Then, install the required dependencies with the following commands:
 
 To launch the recombine.py script, run
 
-`python recombine.py [rep1_s1].nii(.gz) [rep1_s2].nii(.gz) [rep2_s1].nii(.gz) [rep2_s2].nii(.gz) [lowres].nii(.gz) [output_dir]`
+`python recombine.py [rep1_s1].nii(.gz) [rep1_s2].nii(.gz) [rep2_s1].nii(.gz) [rep2_s2].nii(.gz) [lowres].nii(.gz) [output_dir] (--spm_path [SPM_PATH])`
 
 Where:
 - `[rep1_s1].nii(.gz)`: first slab of first repetition
@@ -76,11 +76,14 @@ Where:
 - `[rep2_s1].nii(.gz)`: first slab of second repetition
 - `[rep2_s2].nii(.gz)`: second slab of second repetition
 - `[lowres].nii(.gz)`: low resolution volume
-- `[output_dir]`: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash.
+- `[output_dir]`: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash
+- `[SPM_PATH]`: (optional) path to the SPM folder (i.e., the folder that contains the script spm.m)
 
-All files can be provided as either .nii or .nii.gz volume images.
-
-The final output will be found at [output\_dir]/rs\_float\_ponderated.nii
-
-Temporary files will be found in folder [output\_dir]/debug/.
-Please manually delete this folder to save storage space.
+**Note:**
+- All files can be provided as either .nii or .nii.gz volume images.
+- The final output will be found at [output\_dir]/rs\_float\_ponderated.nii
+- Temporary files will be found in folder [output\_dir]/debug/. Please manually delete this folder to save storage space.
+- The path to SPM only has to be provided if no installation of SPM has been detected by Matlab. You can check this by
+    1. launching a Matlab session
+    2. typing `which spm` inside the session
+    3. checking that the output is a valid path to spm.m and not the error message _'spm' not found_
