@@ -26,7 +26,6 @@ import nilearn.image
 import nipype.interfaces.spm as spm
 
 
-
 def read_cli_args():
     """Read command-line interface arguments
 
@@ -131,7 +130,6 @@ def prepare_folders(outdir_path):
     return [debugdir_path, tempdir_path]
 
 
-
 def nii_copy(im_inpath, im_outpath):
     """Copy from input to output path with output in .nii
 
@@ -171,7 +169,6 @@ def nii_copy(im_inpath, im_outpath):
         raise IOError(error_msg)
 
 
-
 def safe_remove(impath, dirpath):
     """Check if image is in right folder before removing
 
@@ -208,7 +205,6 @@ def safe_remove(impath, dirpath):
     else:
         error_msg = 'Error: file {0} does not exist'.format(impath)
         raise IOError(error_msg)
-
 
 
 def volume_duplication(in_volume, duplication_factor, axis):
@@ -271,7 +267,6 @@ def volume_duplication(in_volume, duplication_factor, axis):
     return out_volume
 
 
-
 def file_volume_duplication(
         in_volume_path,
         duplication_factor,
@@ -298,7 +293,6 @@ def file_volume_duplication(
     out_volume = volume_duplication(in_volume, duplication_factor, axis)
     # save output volume
     nib.save(out_volume, out_volume_path)
-
 
 
 def insert_gap(in_volume, gap_factor, gap_position, axis):
@@ -358,7 +352,6 @@ def insert_gap(in_volume, gap_factor, gap_position, axis):
     return out_volume
 
 
-
 def file_insert_gap(
         in_volume_path,
         gap_factor,
@@ -389,7 +382,6 @@ def file_insert_gap(
     nib.save(out_volume, out_volume_path)
 
 
-
 def create_phantom(in_volume, value):
     """Create constant-valued phantom
 
@@ -417,7 +409,6 @@ def create_phantom(in_volume, value):
     return out_volume
 
 
-
 def file_create_phantom(in_volume_path, value, out_volume_path):
     """Create constant-valued phantom and save file
 
@@ -437,7 +428,6 @@ def file_create_phantom(in_volume_path, value, out_volume_path):
     out_volume = create_phantom(in_volume, value)
     # save output volume
     nib.save(out_volume, out_volume_path)
-
 
 
 def int2float(in_volume):
@@ -465,7 +455,6 @@ def int2float(in_volume):
     return out_volume
 
 
-
 def file_int2float(in_volume_path, out_volume_path):
     """Convert from int to float and save volume
 
@@ -484,7 +473,6 @@ def file_int2float(in_volume_path, out_volume_path):
     out_volume = int2float(in_volume)
     # save output volume
     nib.save(out_volume, out_volume_path)
-
 
 
 def process_repetition(repetition, sa_path, sb_path, outdir_path):
@@ -579,7 +567,6 @@ def process_repetition(repetition, sa_path, sb_path, outdir_path):
         sa_phantom_gap_path, sb_phantom_gap_path]
 
 
-
 def create_coregister(ref_path, source_path, other_path, register_prefix):
     """Initialise SPM co-registration
 
@@ -616,7 +603,6 @@ def create_coregister(ref_path, source_path, other_path, register_prefix):
     coreg.inputs.out_prefix = register_prefix
 
     return coreg
-
 
 
 def file_spm_registration(ref_path, source_path, other_path, tempdir_path):
@@ -667,7 +653,6 @@ def file_spm_registration(ref_path, source_path, other_path, tempdir_path):
     shutil.copyfile(other_registered_path, other_path)
 
 
-
 def volume_addition(in_volume1, in_volume2):
     """Add two volumes together
 
@@ -703,7 +688,6 @@ def volume_addition(in_volume1, in_volume2):
     return out_volume
 
 
-
 def file_volume_addition(in_volume1_path, in_volume2_path, out_volume_path):
     """Add two volumes from files and save
 
@@ -724,7 +708,6 @@ def file_volume_addition(in_volume1_path, in_volume2_path, out_volume_path):
     out_volume = volume_addition(in_volume1, in_volume2)
     # save output volume
     nib.save(out_volume, out_volume_path)
-
 
 
 def volume_division(in_volume1, in_volume2):
@@ -771,7 +754,6 @@ def volume_division(in_volume1, in_volume2):
     return out_volume
 
 
-
 def file_volume_division(in_volume1_path, in_volume2_path, out_volume_path):
     """Divide two volumes from files and save
 
@@ -792,7 +774,6 @@ def file_volume_division(in_volume1_path, in_volume2_path, out_volume_path):
     out_volume = volume_division(in_volume1, in_volume2)
     # save output volume
     nib.save(out_volume, out_volume_path)
-
 
 
 def gzip_images(impath_list, dirpath):
@@ -834,7 +815,6 @@ def gzip_images(impath_list, dirpath):
                 shutil.copyfileobj(imfile, imgzfile)
         # remove original non-compressed image
         safe_remove(impath, dirpath)
-
 
 
 def part1(
@@ -944,7 +924,6 @@ def part1(
         lr2b_path, s2b_float_path, s2b_phantom_gap_path]
 
 
-
 def part2(
         lr1a_path, s1a_float_path, s1a_phantom_gap_path,
         lr1b_path, s1b_float_path, s1b_phantom_gap_path,
@@ -1014,7 +993,6 @@ def part2(
     # gzip all the images that are not given as input to part 3 of
     # the recombination algorithm
     gzip_images([lr1a_path, lr1b_path, lr2a_path, lr2b_path], debugdir_path)
-
 
 
 def part3(
@@ -1144,8 +1122,6 @@ def part3(
         raise IOError(error_msg)
 
 
-
-
 def show_completion_message(outdir_path, debugdir_path):
     """Show message to indicate successfull completion
 
@@ -1172,7 +1148,6 @@ def show_completion_message(outdir_path, debugdir_path):
     print('')
     print('Output data to be found in')
     print(outdir_path)
-
 
 
 def main():
@@ -1239,7 +1214,6 @@ def main():
 
     # show completion_message
     show_completion_message(args.outdir_path, debugdir_path)
-
 
 
 if __name__ == "__main__":
