@@ -85,7 +85,7 @@ Where:
 - All files must be provided as either .nii or .nii.gz volume images.
 - The final output will be found at [output\_dir]/rs\_float\_ponderated.nii
 - Temporary files will be found in folder [output\_dir]/debug/. Please manually delete this folder to save storage space.
-- The path to SPM only has to be provided if no installation of SPM has been detected by Matlab. You can check this by
+- The path to SPM only needs to be provided if no installation of SPM has been detected by Matlab. You can check this by
     1. launching a Matlab session
     2. typing `which spm` inside the session
     3. checking that the output is a valid path to spm.m and not the error message _'spm' not found_
