@@ -67,7 +67,9 @@ Then, install the required dependencies with the following commands:
 `source activate recombine_env`.
 
 To launch the recombine.py script, run
+
 `python recombine.py [rep1\_s1].nii(.gz) [rep1\_s2].nii(.gz) [rep2\_s1].nii(.gz) [rep2\_s2].nii(.gz) [lowres].nii(.gz) [output_dir]`.
+
 Where:
 - [rep1\_s1].nii(.gz): first slab of first repetition
 - [rep1\_s2].nii(.gz): second slab of first repetition
