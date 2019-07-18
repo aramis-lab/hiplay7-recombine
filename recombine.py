@@ -42,36 +42,43 @@ def read_cli_args():
         resolution slab'
     parser = argparse.ArgumentParser(description=cli_description)
     # add arguments
-    #-- first slab of first repetition
+    #-- mandatory arguments
+    #---- first slab of first repetition
     parser.add_argument(
         'rep1s1_path',
         metavar='rep1s1',
         help='.nii(.gz) first slab of first repetition')
-    #-- second slab of first repetition
+    #---- second slab of first repetition
     parser.add_argument(
         'rep1s2_path',
         metavar='rep1s2',
         help='.nii(.gz) second slab of first repetition')
-    #-- first slab of first repetition
+    #---- first slab of first repetition
     parser.add_argument(
         'rep2s1_path',
         metavar='rep2s1',
         help='.nii(.gz) first slab of second repetition')
-    #-- second slab of first repetition
+    #---- second slab of first repetition
     parser.add_argument(
         'rep2s2_path',
         metavar='rep2s2',
         help='.nii(.gz) second slab of second repetition')
-    #-- low resolution volume
+    #---- low resolution volume
     parser.add_argument(
         'lowres_path',
         metavar='lowres',
         help='.nii(.gz) low resolution volume')
-    #-- output dir
+    #---- output dir
     parser.add_argument(
         'outdir_path',
         metavar='out_dir',
         help='path where output files will be stored')
+    #-- optional arguments
+    parser.add_argument(
+        '-spm',
+        '--spm_path',
+        help='path to SPM folder (i.e., where spm.m is located)')
+    #---- test
     # parse all arguments
     args = parser.parse_args()
 
