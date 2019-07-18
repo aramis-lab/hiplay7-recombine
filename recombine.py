@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 """Code to combine different slabs into a single high resolution slab
 
 # This code was developed by Linda Marrakchi at the ARAMIS lab.
@@ -15,12 +17,66 @@
 import sys
 import os
 import shutil
+import argparse
 import gzip
 import numpy as np
 import nibabel as nib
 import nilearn as nil
 import nilearn.image
 import nipype.interfaces.spm as spm
+
+
+
+def read_cli_args():
+    """Read command-line interface arguments
+
+    Parse the input to the command line with the argparse module.
+
+    Args:
+        N/A
+
+    Returns:
+        args
+    """
+    # read command line arguments
+    cli_description = 'Code to combine different slabs into a single high\
+        resolution slab'
+    parser = argparse.ArgumentParser(description=cli_description)
+    # add arguments
+    #-- first slab of first repetition
+    parser.add_argument(
+        'rep1s1_path',
+        metavar='rep1s1',
+        help='.nii(.gz) first slab of first repetition')
+    #-- second slab of first repetition
+    parser.add_argument(
+        'rep1s2_path',
+        metavar='rep1s2',
+        help='.nii(.gz) second slab of first repetition')
+    #-- first slab of first repetition
+    parser.add_argument(
+        'rep2s1_path',
+        metavar='rep2s1',
+        help='.nii(.gz) first slab of second repetition')
+    #-- second slab of first repetition
+    parser.add_argument(
+        'rep2s2_path',
+        metavar='rep2s2',
+        help='.nii(.gz) second slab of second repetition')
+    #-- low resolution volume
+    parser.add_argument(
+        'lowres_path',
+        metavar='lowres',
+        help='.nii(.gz) low resolution volume')
+    #-- output dir
+    parser.add_argument(
+        'outdir_path',
+        metavar='out_dir',
+        help='path where output files will be stored')
+    # parse all arguments
+    args = parser.parse_args()
+
+    return args
 
 
 def usage():
@@ -1176,7 +1232,11 @@ def main():
     Returns:
         N/A
     """
-    # read command line arguments
+    # parse command-line arguments
+    args = read_cli_args()
+    import IPython ; IPython.embed()
+
+
     if len(sys.argv) != 7:
         usage()
     #-- slabs 1/2 of repetitions 1/2
@@ -1190,7 +1250,7 @@ def main():
     outdir_path = sys.argv[6]
 
     # prepare folders
-    [debugdir_path, tempdir_path] = prepare_folders(outdir_path)
+    [debugdir_path, tempdir_path] = prepare_folders(args.outdir_path)
 
     # part 1 - prepare input to SPM
     [
@@ -1198,11 +1258,11 @@ def main():
         lr1b_path, s1b_float_path, s1b_phantom_gap_path,
         lr2a_path, s2a_float_path, s2a_phantom_gap_path,
         lr2b_path, s2b_float_path, s2b_phantom_gap_path] = part1(
-            rep1s1_path,
-            rep1s2_path,
-            rep2s1_path,
-            rep2s2_path,
-            lowres_path,
+            args.rep1s1_path,
+            args.rep1s2_path,
+            args.rep2s1_path,
+            args.rep2s2_path,
+            args.lowres_path,
             debugdir_path)
 
     # part 2 - register with SPM
@@ -1222,10 +1282,10 @@ def main():
         s2b_float_path, s2b_phantom_gap_path,
         debugdir_path,
         tempdir_path,
-        outdir_path)
+        args.outdir_path)
 
     # show completion_message
-    show_completion_message(outdir_path, debugdir_path)
+    show_completion_message(args.outdir_path, debugdir_path)
 
 
 
