@@ -152,6 +152,7 @@ def check_spm_available(args, cli_usage):
         else:
             raise ValueError(
                 '{0} does not exist.'.format(args.spm_path))
+        print('[SPM_PATH] provided by user. Using {0}'.format(spm_path))
     else:
         # SPM path not provided
         # Check if SPM path can be found anyway
@@ -168,7 +169,7 @@ def check_spm_available(args, cli_usage):
         else:
             spmscript_path = whichspm_output
             spm_path = os.path.dirname(spmscript_path)
-            print('[SPM_PATH] not provided by user. Using {0}'.format(spm_path))
+        print('[SPM_PATH] not provided by user. Using {0}'.format(spm_path))
 
     # sanity check: make sure the path is OK
     #-- check the path to SPM is a valid folder
