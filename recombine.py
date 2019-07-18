@@ -107,7 +107,9 @@ def check_spm_available(args, cli_usage):
         cli_usage (string): command-line interface usage message
 
     Returns:
-        N/A
+        spm_path (string): path to SPM folder. Will be either
+            user-defined, or if not, automatically retrieved with the
+            'which spm' Matlab command
     """
     # initialise path
     #-- folder
@@ -166,6 +168,7 @@ def check_spm_available(args, cli_usage):
         else:
             spmscript_path = whichspm_output
             spm_path = os.path.dirname(spmscript_path)
+            print('[SPM_PATH] not provided by user. Using {0}'.format(spm_path))
 
     # sanity check: make sure the path is OK
     #-- check the path to SPM is a valid folder
@@ -192,6 +195,8 @@ def check_spm_available(args, cli_usage):
         error_msg = '{0} does not contain a file spm.m.'.format(spm_path)
         error_msg = '{0} It is not a valid folder'.format(error_msg)
         raise IOError(error_msg)
+
+    return spm_path
 
 
 def prepare_folders(outdir_path):
@@ -244,6 +249,40 @@ def prepare_folders(outdir_path):
             raise
 
     return [debugdir_path, tempdir_path]
+
+
+def spm_path_filestore(debugdir_path, spm_path):
+    """Store SPM location in file
+
+    Will save the path to SPM to a new file, so the user knows what
+    version of SPM they have been using after the recombination process
+    is complete.
+
+    Args:
+        debugdir_path (string): path to 'debug' subfolder where all
+            intermediary images are stored
+        spm_path (string): path to SPM folder. Will be either
+            user-defined, or if not, automatically retrieved with the
+            'which spm' Matlab command
+
+    Returns:
+        N/A
+    """
+    # define location of the file that contains the path to spm
+    spm_path_store_path = os.path.join(debugdir_path, 'spm_location.txt')
+    
+    # check if file already exists (should not)
+    spm_path_store_filename = os.path.basename(spm_path_store_path)
+    spm_path_store_dirname = os.path.dirname(spm_path_store_path)
+    if os.path.exists(spm_path_store_path):
+        raise IOError(
+            'There already is a file {0} in {1}'.format(
+                spm_path_store_filename,
+                spm_path_store_dirname))
+
+    # write spm_path to the store file
+    with open(spm_path_store_path, 'w') as spm_path_store_file:
+        spm_path_store_file.write(spm_path)
 
 
 def nii_copy(im_inpath, im_outpath):
@@ -1294,10 +1333,13 @@ def main():
     args, cli_usage = read_cli_args()
 
     # check SPM available
-    check_spm_available(args, cli_usage)
+    spm_path = check_spm_available(args, cli_usage)
 
     # prepare folders
     [debugdir_path, tempdir_path] = prepare_folders(args.outdir_path)
+
+    # store [spm path] location in file
+    spm_path_filestore(debugdir_path, spm_path)
 
     # part 1 - prepare input to SPM
     [
