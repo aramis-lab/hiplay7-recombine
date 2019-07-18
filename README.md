@@ -71,12 +71,12 @@ To launch the recombine.py script, run
 `python recombine.py [rep1\_s1].nii(.gz) [rep1\_s2].nii(.gz) [rep2\_s1].nii(.gz) [rep2\_s2].nii(.gz) [lowres].nii(.gz) [output_dir]`.
 
 Where:
-- [rep1\_s1].nii(.gz): first slab of first repetition
-- [rep1\_s2].nii(.gz): second slab of first repetition
-- [rep2\_s1].nii(.gz): first slab of second repetition
-- [rep2\_s2].nii(.gz): second slab of second repetition
-- [lowres].nii(.gz): low resolution volume
-- [output\_dir]: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash.
+- `[rep1\_s1].nii(.gz)`: first slab of first repetition
+- `[rep1\_s2].nii(.gz)`: second slab of first repetition
+- `[rep2\_s1].nii(.gz)`: first slab of second repetition
+- `[rep2\_s2].nii(.gz)`: second slab of second repetition
+- `[lowres].nii(.gz)`: low resolution volume
+- `[output\_dir]`: path where temporary and output files will be stored. output\_dir has to be empty, otherwise the script will crash.
 
 All files can be provided as either .nii or .nii.gz volume images.
 
