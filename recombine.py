@@ -79,39 +79,6 @@ def read_cli_args():
     return args
 
 
-def usage():
-    """CLI helper
-
-    Function called if the user does not provide the right number of
-    arguments.
-    Display the correct command line call to the program.
-
-    Args:
-        N/A
-
-    Returns:
-        N/A
-    """
-    print('Error: wrong number of arguments.')
-    print('Usage:')
-    cmdline = 'python recombine.py'
-    cmdline = '{0} [rep1_s1].nii(.gz)'.format(cmdline)
-    cmdline = '{0} [rep1_s2].nii(.gz)'.format(cmdline)
-    cmdline = '{0} [rep2_s1].nii(.gz)'.format(cmdline)
-    cmdline = '{0} [rep2_s2].nii(.gz)'.format(cmdline)
-    cmdline = '{0} [lowres].nii'.format(cmdline)
-    cmdline = '{0} [output_dir]'.format(cmdline)
-    print(cmdline)
-    print('Where:')
-    print('[rep1_s1].nii: first slab of first repetition')
-    print('[rep1_s2].nii: second slab of first repetition')
-    print('[rep2_s1].nii: first slab of second repetition')
-    print('[rep2_s2].nii: second slab of second repetition')
-    print('[lowres].nii: low resolution volume')
-    print('[output_dir]: path where output files will be stored')
-
-
-
 def prepare_folders(outdir_path):
     """Create temporary folders
 
@@ -1234,20 +1201,6 @@ def main():
     """
     # parse command-line arguments
     args = read_cli_args()
-    import IPython ; IPython.embed()
-
-
-    if len(sys.argv) != 7:
-        usage()
-    #-- slabs 1/2 of repetitions 1/2
-    rep1s1_path = sys.argv[1]
-    rep1s2_path = sys.argv[2]
-    rep2s1_path = sys.argv[3]
-    rep2s2_path = sys.argv[4]
-    #-- low-resolution image
-    lowres_path = sys.argv[5]
-    #-- output folder
-    outdir_path = sys.argv[6]
 
     # prepare folders
     [debugdir_path, tempdir_path] = prepare_folders(args.outdir_path)
