@@ -1299,7 +1299,7 @@ def show_completion_message(outdir_path, debugdir_path):
     print('Recombination code successfully run.')
     print('')
     print('Temporary data stored in:')
-    print('- {0}'.format(debugdir_path))
+    print(debugdir_path)
     print('Please remove the above folders to save storage space.')
     print('')
     print('Output data to be found in:')
