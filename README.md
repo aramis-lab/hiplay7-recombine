@@ -87,7 +87,5 @@ Where:
 - Temporary files will be found in folder [output\_dir]/debug/. Please manually delete this folder to save storage space. Contains:
     - intermediary images used to produce the final output
     - file 'spm_location.txt' that shows the path to the SPM folder that was used inside the script
-- The path to SPM only needs to be provided if no installation of SPM has been detected by Matlab. You can check this by
-    1. launching a Matlab session
-    2. typing `which spm` inside the session
-    3. checking that the output is a valid path to spm.m and not the error message _'spm' not found_
+- The path to SPM only needs to be provided if no installation of SPM has been detected by Matlab. You can check this by launching the following command: `python check_spm.py`.
+    ```
