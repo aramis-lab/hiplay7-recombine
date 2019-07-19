@@ -1364,7 +1364,7 @@ def main():
         debugdir_path,
         tempdir_path)
 
-    # part 3 - register with SPM
+    # part 3 - combine volumes
     part3(
         s1a_float_path, s1a_phantom_gap_path,
         s1b_float_path, s1b_phantom_gap_path,
