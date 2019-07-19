@@ -14,7 +14,6 @@
 
 """
 
-import sys
 import os
 import shutil
 import argparse
@@ -27,6 +26,8 @@ import nilearn as nil
 import nilearn.image
 import nipype.interfaces.spm as spm
 import nipype.interfaces.matlab as mlab
+
+import check_spm
 
 
 def read_cli_args():
@@ -140,11 +141,11 @@ def check_spm_available(args, cli_usage):
                     spmscript_path = args.spm_path
                     spm_path = os.path.dirname(spmscript_path)
             elif os.path.isdir(abs_argsspm_path):
-                # we assume that a path to a folder was provided
+                # a path to a folder was provided
                 spm_path = args.spm_path
                 spmscript_path = os.path.join(spm_path, 'spm.m')
             else:
-                # neither a folder nor a file
+                # neither a folder nor a file was provided
                 raise ValueError(
                     '{0} is not a valid path to SPM.'.format(args.spm_path))
             # add to matlab path
@@ -158,17 +159,16 @@ def check_spm_available(args, cli_usage):
         # Check if SPM path can be found anyway
         # (e.g., if file $HOME/matlab/startup.m contains the line
         # addpath [spm_folder])
-        res = mlab.MatlabCommand(script='which spm', mfile=False).run()
-        whichspm_output = res.runtime.stdout.splitlines()[-2]
-        if whichspm_output == '\'spm\' not found.':
+        [
+            spm_found,
+            spm_path,
+            spmscript_path] = check_spm.check_system_spm_available()
+        if not spm_found:
             # SPM not found
             error_msg = 'SPM not found.\nPlease provide the path to'
             error_msg = '{0} SPM with flag -spm [SPM_PATH]'.format(error_msg)
             error_msg = '{0}\n{1}'.format(error_msg, cli_usage)
             raise IOError(error_msg)
-        else:
-            spmscript_path = whichspm_output
-            spm_path = os.path.dirname(spmscript_path)
         print('[SPM_PATH] not provided by user. Using {0}'.format(spm_path))
 
     # sanity check: make sure the path is OK
