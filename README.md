@@ -88,4 +88,3 @@ Where:
     - intermediary images used to produce the final output
     - file 'spm_location.txt' that shows the path to the SPM folder that was used inside the script
 - The path to SPM only needs to be provided if no installation of SPM has been detected by Matlab. You can check this by launching the following command: `python check_spm.py`.
-    ```
