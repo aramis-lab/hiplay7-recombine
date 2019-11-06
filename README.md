@@ -25,9 +25,10 @@ image from the following input:
 
 For any use of this code, please cite the following article:
 > L Marrakchi-Kacem, A Vignaud, J Sein, J Germain, TR Henry, C Poupon, 
-> L Hertz-Pannier, S Lehericy, O Colliot, PF Van de Moortele, M Chupin. 
+> L Hertz-Pannier, S Lehericy, O Colliot, PF Van de Moortele, M Chupin, 2016. 
 > Robust imaging of hippocampal inner structure at 7T: in vivo
 > acquisition protocol and methodological choices.
+> _Magnetic Resonance Materials in Physics, Biology and Medicine_  29(3), pp.475-489.
 
 
 ## Installation
