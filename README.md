@@ -6,6 +6,12 @@ slab.
 **Authors**: Linda Marrakchi-Kacem (Brain and Spine Institute), Alexis
 Guyot (Brain and Spine Institute).
 
+This software tool allows to automatically recombine multiple MRI slabs
+into a single high resolution slab. This is used for 7T MRI acquisitions
+dedicated to the study of hippocampal subregions.
+More tools and resources to study the hippocampus using 7T MRI are
+available at http://www.aramislab.fr/sevenhipp/
+
 
 ## Overview
 
