@@ -10,7 +10,7 @@ This software tool allows to automatically recombine multiple MRI slabs
 into a single high resolution slab. This is used for 7T MRI acquisitions
 dedicated to the study of hippocampal subregions.
 More tools and resources to study the hippocampus using 7T MRI are
-available at http://www.aramislab.fr/sevenhipp/
+available at http://www.aramislab.fr/sevenhipp/ .
 
 
 ## Overview
@@ -29,6 +29,8 @@ For any use of this code, please cite the following article:
 > Robust imaging of hippocampal inner structure at 7T: in vivo
 > acquisition protocol and methodological choices.
 > _Magnetic Resonance Materials in Physics, Biology and Medicine_  29(3), pp.475-489.
+
+This article is available at https://hal.inria.fr/hal-01321870/document .
 
 
 ## Installation
