@@ -1,10 +1,7 @@
 # HIPLAY7 - recombine
 
-`recombine.py` - combine several slabs into a single high resolution
-slab.
-
-**Authors**: Linda Marrakchi-Kacem (Brain and Spine Institute), Alexis
-Guyot (Brain and Spine Institute).
+**Authors**: Linda Marrakchi-Kacem ([ARAMIS Lab](http://www.aramislab.fr), Brain and Spine Institute), Alexis
+Guyot (ARAMIS Lab, Brain and Spine Institute).
 
 This software tool allows to automatically recombine multiple MRI slabs
 into a single high resolution slab. This is used for 7T MRI acquisitions
